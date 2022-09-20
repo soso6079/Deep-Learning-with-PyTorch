@@ -35,12 +35,14 @@ def getCandidateInfoList(requireOnDisk_bool=True):
     # We construct a set with all series_uids that are present on disk.
     # This will let us use the data, even if we haven't downloaded all of
     # the subsets yet.
-    # mhd_list = glob.glob('data-unversioned/part2/luna/subset*/*.mhd')
     mhd_list = glob.glob('F:\\gongbu/subset*/*.mhd')
+    # mhd_list = glob.glob('/content/drive/MyDrive/subset*/*.mhd')
     presentOnDisk_set = {os.path.split(p)[-1][:-4] for p in mhd_list}
 
     diameter_dict = {}
+
     with open('F:\\gongbu/annotations.csv', 'r') as f:
+    # with open('/p2ch11/annotations.csv', 'r') as f:
     # with open('data/part2/luna/annotations.csv', "r") as f:
         for row in list(csv.reader(f))[1:]:
             series_uid = row[0]
@@ -53,6 +55,7 @@ def getCandidateInfoList(requireOnDisk_bool=True):
 
     candidateInfo_list = []
     # with open('data/part2/luna/candidates.csv', "r") as f:
+    # with open('/p2ch11/candidates.csv', 'r') as f:
     with open('F:\\gongbu/candidates.csv', 'r') as f:
         for row in list(csv.reader(f))[1:]:
             series_uid = row[0]
@@ -87,6 +90,7 @@ def getCandidateInfoList(requireOnDisk_bool=True):
 class Ct:
     def __init__(self, series_uid):
         mhd_path = glob.glob('F:\\gongbu/subset*/{}.mhd'.format(series_uid))[0]
+        # mhd_path = glob.glob('/content/drive/MyDrive/subset*/*.mhd'.format(series_uid))[0]
         # mhd_path = glob.glob(
         #     'data-unversioned/part2/luna/subset*/{}.mhd'.format(series_uid)
         # )[0]
